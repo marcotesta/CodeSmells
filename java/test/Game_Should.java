@@ -14,36 +14,36 @@ public class Game_Should {
 
     @Test
     public void NotAllowPlayerOToPlayFirst() {
-        assertThrows(Exception.class, () -> game.Play('O', 0, 0));
+        assertThrows(Exception.class, () -> game.Play(Symbol.O, 0, 0));
     }
 
     @Test
     public void NotAllowPlayerXToPlayTwiceInARow() {
         assertThrows(Exception.class, () ->{
-            game.Play('X', 0, 0);
-            game.Play('X', 1, 0);
+            game.Play(Symbol.X, 0, 0);
+            game.Play(Symbol.X, 1, 0);
         });
     }
 
     @Test
     public void NotAllowPlayerToPlayInLastPlayedPosition() {
         assertThrows(Exception.class, () ->{
-            game.Play('X', 0, 0);
-            game.Play('O', 0, 0);
+            game.Play(Symbol.X, 0, 0);
+            game.Play(Symbol.O, 0, 0);
         });
     }
 
     @Test
     public void NotAllowPlayerToPlayInAnyPlayedPosition() {
         assertThrows(Exception.class, () ->{
-            game.Play('X', 0, 0);
-            game.Play('O', 1, 0);
-            game.Play('X', 0, 0);
+            game.Play(Symbol.X, 0, 0);
+            game.Play(Symbol.O, 1, 0);
+            game.Play(Symbol.X, 0, 0);
         });
     }
 
     @Test
-    public void DeclarePlayerXAsAWinnerIfThreeInTopRow() throws Exception
+    public void DeclarePlayerXAsAWinnerIfThreeInTopRowOLD() throws Exception
     {
         game.Play('X', 0, 0);
         game.Play('O', 1, 0);
@@ -54,6 +54,20 @@ public class Game_Should {
         char winner = game.Winner();
 
         assertEquals('X', winner);
+    }
+
+    @Test
+    public void DeclarePlayerXAsAWinnerIfThreeInTopRow() throws Exception
+    {
+        game.Play(Symbol.X, 0, 0);
+        game.Play(Symbol.O, 1, 0);
+        game.Play(Symbol.X, 0, 1);
+        game.Play(Symbol.O, 1, 1);
+        game.Play(Symbol.X, 0, 2);
+
+        Symbol winner = game.WinnerNEW();
+
+        assertEquals(Symbol.X, winner);
     }
 
     @Test

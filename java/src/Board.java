@@ -15,6 +15,7 @@ public class Board
                 tile.X = i;
                 tile.Y = j;
                 tile.Symbol = ' ';
+                tile.SymbolNew = Symbol.EMPTY;
                 _plays.add(tile);
             }
         }
@@ -38,5 +39,14 @@ public class Board
         newTile.Symbol = symbol;
 
         TileAt(x,y).Symbol = symbol;
+    }
+    public void AddTileAt(Symbol symbol, int x, int y)
+    {
+        Tile newTile = new Tile();
+        newTile.X = x;
+        newTile.Y = y;
+        newTile.SymbolNew = symbol;
+
+        TileAt(x,y).SymbolNew = symbol;
     }
 }
